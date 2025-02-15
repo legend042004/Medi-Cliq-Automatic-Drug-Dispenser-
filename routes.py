@@ -1,7 +1,7 @@
 from flask import Blueprint,request, jsonify
 from qr_scan import scan_qr  # Import scan_qr function
 import psycopg2
-from hardware import rotateservo
+#from hardware import rotateservo
 
 routes_bp = Blueprint('routes', __name__)
 
@@ -44,13 +44,13 @@ def get_medicines():
 
 
 
-def dispense_medicine(medicine_list):
+'''def dispense_medicine(medicine_list):
     
     print("Dispensing Medicines...")
     for medicine in medicine_list:
         print(f"Dispensing {medicine['cartQuantity']} units of Medicine ID {medicine['id']}")
         rotateservo(medicine['id'],medicine['cartQuantity'])
-    print("Dispensing Complete!")
+    print("Dispensing Complete!")'''
 
 
 @routes_bp.route('/update_medicine_stock', methods=['POST'])
@@ -62,7 +62,7 @@ def update_medicine_stock():
     cursor = conn.cursor()
     try:
         data = request.json.get("cart", [])  # List of medicines in cart
-        dispense_medicine(data)  # Call dummy dispense function with cart data
+        #dispense_medicine(data)  # Call dummy dispense function with cart data
 
         for item in data:
             cursor.execute(

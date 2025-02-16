@@ -1,9 +1,12 @@
 from flask import Blueprint,request, jsonify
 from qr_scan import scan_qr  # Import scan_qr function
 import psycopg2
-#from hardware import rotateservo
+from pyfirmata import Arduino, SERVO
+from time import sleep
 
 routes_bp = Blueprint('routes', __name__)
+
+    
 
 @routes_bp.route('/scan_qr', methods=['GET'])
 def scan_qr_api():
@@ -42,15 +45,33 @@ def get_medicines():
         cursor.close()
         conn.close()
 
+def rotateservo(med_id, qty):
+    port = 'COM11'
+    servo_pins = {3: 3, 4: 4, 5: 5} 
+    board = Arduino(port)
+
+    if board:
+        print("Successfully connected to Arduino")
+
+    board.digital[3].mode = SERVO
+    board.digital[4].mode = SERVO
+    board.digital[5].mode = SERVO    
+    if med_id not in servo_pins:
+        print(f"Error: No servo assigned for Medicine ID {med_id}")
+        return  # Skip if no valid servo
+    print("control at rotateservo")
+    board.digital[med_id].write(180)  # Start rotation
+    sleep(2.5 * qty)  # Rotate based on quantity
+    board.digital[med_id].write(90)  # Stop rotation
 
 
-'''def dispense_medicine(medicine_list):
-    
+def dispense_medicine(medicine_list):
+
     print("Dispensing Medicines...")
     for medicine in medicine_list:
         print(f"Dispensing {medicine['cartQuantity']} units of Medicine ID {medicine['id']}")
         rotateservo(medicine['id'],medicine['cartQuantity'])
-    print("Dispensing Complete!")'''
+    print("Dispensing Complete!")
 
 
 @routes_bp.route('/update_medicine_stock', methods=['POST'])
@@ -62,7 +83,7 @@ def update_medicine_stock():
     cursor = conn.cursor()
     try:
         data = request.json.get("cart", [])  # List of medicines in cart
-        #dispense_medicine(data)  # Call dummy dispense function with cart data
+        dispense_medicine(data)  # Call dummy dispense function with cart data
 
         for item in data:
             cursor.execute(

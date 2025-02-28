@@ -2,7 +2,11 @@ import cv2
 import json
 
 def scan_qr():
-    cap = cv2.VideoCapture(0)  # Open the camera
+    cap = cv2.VideoCapture(0)
+    if not cap.isOpened():
+        print("Error: Camera could not be opened!")
+    else:
+        print("Camera successfully accessed!")# Open the camera
     detector = cv2.QRCodeDetector()
 
     while True:

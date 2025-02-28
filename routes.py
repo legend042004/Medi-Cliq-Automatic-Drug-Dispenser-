@@ -1,7 +1,7 @@
 from flask import Blueprint,request, jsonify
 from qr_scan import scan_qr  # Import scan_qr function
 import psycopg2
-from pyfirmata import Arduino, SERVO
+#from pyfirmata import Arduino, SERVO
 from time import sleep
 
 routes_bp = Blueprint('routes', __name__)
@@ -113,7 +113,7 @@ def dispense_medicine(medicine_list):
     print("Dispensing Medicines...")
     for medicine in medicine_list:
         print(f"Dispensing {medicine['cartQuantity']} units of Medicine ID {medicine['id']}")
-        rotateservo(medicine['id'],medicine['cartQuantity'])
+        #rotateservo(medicine['id'],medicine['cartQuantity'])
     print("Dispensing Complete!")
 
 

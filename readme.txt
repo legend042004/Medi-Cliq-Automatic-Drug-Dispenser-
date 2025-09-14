@@ -51,13 +51,6 @@ python newapp.py
 ```
 Flask API will start at `http://127.0.0.1:5000`
 
-Deploy on Render
-- Push code to **private GitHub repository**.
-- Use **Render** to deploy from GitHub (Follow [Render Deployment Guide](https://render.com/docs/deploy-an-app)).
-- Add environment variables:
-  - `PORT=5000`
-  - `DATABASE_URL=<your_neon_postgres_url>`
-
 Usage
 1. **Scan a QR Code** (via frontend or `/scan_qr` API).
 2. **Add medicines to cart** (manually or via QR data).
@@ -82,4 +75,5 @@ This project is **private** and not publicly shared.
 Maintainer: Om Sanjay Bahirat
 Contact: ombahirat04@gmail.com  
 Developed for Secure Medicine Dispensing
+
 

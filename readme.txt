@@ -1,3 +1,7 @@
+Note:- This is Half Section of the whole project where the qr encoding and doctor, patient login is developed and maintained privately by another team member.
+
+here is the code of the dispenser Mechanism developed by me.
+
 # QR-Based Medicine Dispenser
 
 This project is a **QR-based medicine dispensing system** that automates medicine retrieval using a **Flask backend, PostgreSQL database, QR scanning, and Arduino-controlled servos** for dispensing. The system ensures **accurate and efficient medicine distribution** with a web-based UI.
@@ -68,9 +72,6 @@ API Endpoints
 | `/scan_qr` | `GET` | Scans a QR code & returns medicine details |
 | `/get_medicines` | `GET` | Fetches available medicines from DB |
 | `/update_medicine_stock` | `POST` | Updates stock & dispenses medicines |
-
-License
-This project is **private** and not publicly shared.
 
 Maintainer: Om Sanjay Bahirat
 Contact: ombahirat04@gmail.com  
